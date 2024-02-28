@@ -1,4 +1,4 @@
-FROM golang:1.18.4-alpine3.16 AS build
+FROM golang:alpine AS build
 
 RUN apk --no-cache add libc6-compat device-mapper findutils build-base linux-headers linux-lts-dev bash git wget cmake pkgconfig ndctl-dev make python3 && \
     apk --no-cache add zfs || true && \
