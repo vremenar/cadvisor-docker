@@ -82,7 +82,7 @@ jobs:
           GOOS=linux GOARCH=amd64 ./build/build.sh amd64
           mv _output/cadvisor amd64/
           mkdir -p arm64
-          GOOS=linux GOARCH=arm64 ./build/build.sh arm64
+          GOOS=linux GOARCH=arm64 CC_FOR_TARGET=gcc-aarch64-linux-gnu ./build/build.sh arm64
           mv _output/cadvisor arm64/
           go mod vendor
           rm -f cadvisor || true
