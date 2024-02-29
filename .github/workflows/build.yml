@@ -53,7 +53,7 @@ jobs:
           export CADVISOR_VERSION=$(curl -s https://api.github.com/repos/google/cadvisor/releases | jq -r "[[.[] | select(.draft != true) | select(.prerelease != true)][0]][0].name")
           export GO111MODULE=on
           export GO_FLAGS="-tags=netgo"
-          export CGO_ENABLED="0"
+          export CGO_ENABLED="1"
           export OUTPUT_NAME_WITH_ARCH=false
           echo ${CI_REGISTRY_IMAGE}
           echo ${BUILDX_PLATFORM}
