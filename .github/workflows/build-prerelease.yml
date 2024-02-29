@@ -52,7 +52,7 @@ jobs:
           export BUILDX_PLATFORM=linux/amd64,linux/arm64
           export CADVISOR_VERSION=$(curl -s https://api.github.com/repos/google/cadvisor/releases | jq -r "[[.[] | select(.draft != true) | select(.prerelease == true)][0]][0].name")
           export GO111MODULE=on
-          export GO_FLAGS="-tags=netgo"
+          export GO_FLAGS="-tags=netgoGO -buildvcs=false"
           export CGO_ENABLED="1"
           export OUTPUT_NAME_WITH_ARCH=false
           echo ${CI_REGISTRY_IMAGE}
@@ -61,6 +61,7 @@ jobs:
           echo #0
           docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ${CI_REGISTRY_IMAGE}/cache/builder --cache-to ${CI_REGISTRY_IMAGE}/cache/builder --build-arg CADVISOR_VERSION -f Dockerfile.builder -t ${CI_REGISTRY_IMAGE}/builder --push "."
           echo #1
+          git config --global --add safe.directory /go/src/github.com/google/cadvisor
           git clone https://github.com/google/cadvisor
           cd cadvisor
           git checkout master
@@ -95,5 +96,3 @@ jobs:
           cd -
           echo #2
           docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION}-pre --cache-to ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION}-pre --build-arg CADVISOR_VERSION -f Dockerfile.deploy -t ${CI_REGISTRY_IMAGE}/cadvisor:${CADVISOR_VERSION}-pre -t ${CI_REGISTRY_IMAGE}/cadvisor:latest-pre --push "."
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${CI_REGISTRY_IMAGE}/cadvisor:${CADVISOR_VERSION}-pre docker://zcube/cadvisor:${CADVISOR_VERSION}-pre
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${CI_REGISTRY_IMAGE}/cadvisor:${CADVISOR_VERSION}-pre docker://zcube/cadvisor:latest-pre
