@@ -16,7 +16,7 @@ RUN chmod +x /env.sh \
  && /env.sh \
  && cd $GOPATH/src/github.com/google/cadvisor \
  && cp -f $TARGETARCH/$TARGETVARIANT/cadvisor /cadvisor \
- && GO111MODULE=on OUTPUT_NAME_WITH_ARCH=false ./build/build.sh || true \
+ && GO111MODULE=on OUTPUT_NAME_WITH_ARCH=false GO_FLAGS=-buildvcs=false ./build/build.sh || true \
  && mv -f _output/cadvisor /cadvisor || true
 
 FROM alpine:latest
