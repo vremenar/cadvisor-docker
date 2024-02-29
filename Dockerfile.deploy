@@ -1,4 +1,4 @@
-FROM vremenar/cadvisor-base:latest AS build
+FROM ghcr.io/vremenar/cadvisor-docker/builder:latest AS build
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
