@@ -82,7 +82,7 @@ jobs:
           GOOS=linux GOARCH=amd64 ./build/build.sh amd64
           mv _output/cadvisor amd64/
           mkdir -p arm64
-          sudo apu update -y 
+          sudo apt update -y 
           sudo apt install gcc-aarch64-linux-gnu -y
           GOOS=linux GOARCH=arm64 CC=aarch64-linux-gnu-gcc ./build/build.sh arm64
           mv _output/cadvisor arm64/
