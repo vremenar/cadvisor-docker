@@ -66,12 +66,12 @@ jobs:
           git checkout $CADVISOR_VERSION
           go mod download
           ./build/assets.sh
-          go get github.com/Shopify/sarama@latest
+          go get github.com/IBM/sarama@latest
           go mod tidy
           go mod download
           go mod vendor
           cd cmd
-          go get github.com/Shopify/sarama@latest
+          go get github.com/IBM/sarama@latest
           go mod tidy
           go mod download
           go mod vendor
