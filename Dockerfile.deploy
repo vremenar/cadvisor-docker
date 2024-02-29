@@ -1,25 +1,25 @@
-FROM ghcr.io/zcube/cadvisor-docker/builder:latest AS build
+FROM vremenar/cadvisor-base:latest AS build
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
 ENV GO_TAGS netgo
 ENV CGO_ENABLED 1
+
 ARG TARGETVARIANT
 ARG TARGETARCH
-
 #ENV GO_FLAGS="-tags=netgo"
 ADD env.sh /env.sh
 ADD cadvisor.tar.gz $GOPATH/src/github.com/google/
 ADD mod.tar.gz $GOPATH/pkg/
 
-run chmod +x /env.sh \
+RUN chmod +x /env.sh \
  && /env.sh \
  && cd $GOPATH/src/github.com/google/cadvisor \
  && cp -f $TARGETARCH/$TARGETVARIANT/cadvisor /cadvisor \
  && GO111MODULE=on OUTPUT_NAME_WITH_ARCH=false ./build/build.sh || true \
  && mv -f _output/cadvisor /cadvisor || true
 
-FROM alpine:3.16
+FROM alpine:latest
 MAINTAINER dengnan@google.com vmarmol@google.com vishnuk@google.com jimmidyson@gmail.com stclair@google.com
 
 RUN apk --no-cache add libc6-compat device-mapper findutils ndctl && \
