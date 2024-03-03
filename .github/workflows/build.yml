@@ -101,7 +101,7 @@ jobs:
           mv _output/cadvisor arm64/
           mkdir -p arm/v7
           sudo apt update -y
-          sudo apt install gcc-arm-linux-gnueabihf
+          sudo apt install gcc-arm*
           GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf ./build/build.sh arm
           mv _output/cadvisor arm/v7/
           go mod vendor
