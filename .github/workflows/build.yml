@@ -95,4 +95,4 @@ jobs:
           tar czf ${CI_PROJECT_DIR}/mod.tar.gz mod
           cd -
           echo #2
-          docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION} --cache-to ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION} --build-arg CADVISOR_VERSION -f Dockerfile.deploy -t ${CI_REGISTRY_IMAGE}/cadvisor:${CADVISOR_VERSION} -t ${CI_REGISTRY_IMAGE}/cadvisor:latest --push "."
+          docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION} --cache-to ${CI_REGISTRY_IMAGE}/cache/cadvisor:${CADVISOR_VERSION} --build-arg CADVISOR_VERSION -f Dockerfile.deploy -t ${CI_REGISTRY_IMAGE}/cadvisor-docker:${CADVISOR_VERSION} -t ${CI_REGISTRY_IMAGE}/cadvisor-docker:latest -t ghcr.io/vremenar/rpi-setup/cadvisor-docker:latest --push "."
