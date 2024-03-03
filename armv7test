@@ -1,0 +1,5 @@
+          #mkdir -p arm/v7
+          #sudo apt update -y
+          #sudo apt install gcc-arm*
+          #GOOS=linux GOARCH=arm GOARM=7 CC=gcc-arm-linux-gnueabihf ./build/build.sh arm
+          #mv _output/cadvisor arm/v7/
