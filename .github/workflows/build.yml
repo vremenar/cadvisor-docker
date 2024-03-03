@@ -66,7 +66,7 @@ jobs:
           echo ${CADVISOR_VERSION}
           echo #0
           git config --global --add safe.directory /go/src/github.com/google/cadvisor
-          docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ghcr.io/vremenar/cache/builder --cache-to ghcr.io/vremenar/cache/builder --build-arg CADVISOR_VERSION -f Dockerfile.builder -t $ghcr.io/vremenar/builder --push "."
+          docker buildx build --platform=${BUILDX_PLATFORM} --cache-from ghcr.io/vremenar/cache/builder --cache-to ghcr.io/vremenar/cache/builder --build-arg CADVISOR_VERSION -f Dockerfile.builder -t ghcr.io/vremenar/builder --push "."
           echo #1
           git clone https://github.com/google/cadvisor
           cd cadvisor
