@@ -100,6 +100,8 @@ jobs:
           GOOS=linux GOARCH=arm64 CC=aarch64-linux-gnu-gcc ./build/build.sh arm64
           mv _output/cadvisor arm64/
           mkdir -p arm/v7
+          sudo apt update -y
+          sudo apt install gcc-arm-linux-gnueabihf
           GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-musleabihf-gcc ./build/build.sh arm
           mv _output/cadvisor arm/v7/
           go mod vendor
