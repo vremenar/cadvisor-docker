@@ -102,7 +102,7 @@ jobs:
           mkdir -p arm/v7
           sudo apt update -y
           sudo apt install gcc-arm-linux-gnueabihf
-          GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-musleabihf-gcc ./build/build.sh arm
+          GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf ./build/build.sh arm
           mv _output/cadvisor arm/v7/
           go mod vendor
           rm -f cadvisor || true
