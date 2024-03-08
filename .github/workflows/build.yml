@@ -70,7 +70,7 @@ jobs:
         run: |
           export CI_PROJECT_DIR=${PWD}
           export CI_REGISTRY_IMAGE=${{ env.GHCR }}/${{ steps.repository.outputs.lowercase }}
-          export BUILDX_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
+          export BUILDX_PLATFORM=linux/amd64,linux/arm64
           export CADVISOR_VERSION=$(curl -s https://api.github.com/repos/google/cadvisor/releases | jq -r "[[.[] | select(.draft != true) | select(.prerelease != true)][0]][0].name")
           export GO111MODULE=on
           export GO_FLAGS="-tags=netgo -buildvcs=false"
